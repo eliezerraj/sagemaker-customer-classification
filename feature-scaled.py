@@ -7,6 +7,7 @@ import os
 import tempfile
 import numpy as np
 import pandas as pd
+from sklearn.preprocessing import StandardScaler
 
 # install libraries
 def install(package):
@@ -72,7 +73,18 @@ if __name__ == "__main__":
     print("-------------------- df_training  ----------------------------")
     print(df_training.head(3))
 
+    print("-------------------- scaling dataframe  -----------------------")
+    scaler = StandardScaler()
+
+    df_data_scaled = scaler.fit_transform(df_training).astype('float32')
+    df_data_scaled
+
+    print("-------------------- df_data_scaled  ----------------------------")
+    print(df_data_scaled)
+
     # Save the Dataframes as csv files
-    df_training.to_csv(f"{base_dir}/train/train_data.csv", header=True, index=False)
+    # convert array into dataframe 
+    df_data_scaled_final = pd.DataFrame(df_data_scaled).astype('float32')
+    df_data_scaled_final.to_csv(f"{base_dir}/train/train_data.csv", header=False, index=False)
 
     print("## Processing completed. Exiting.")
