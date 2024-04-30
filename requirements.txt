@@ -1,1 +1,3 @@
-imbalanced-learn
+fsspec
+s3fs
+scikit-learn==1.3.2
