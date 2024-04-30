@@ -1,0 +1,19 @@
+version: 0.2
+  
+phases:
+  install:
+    runtime-versions:
+      python: 3.12
+    commands:
+      - pip install --upgrade pip
+      - pip install awscliv2
+      - pip install boto3
+      - pip install sagemaker
+  
+  build:
+    commands:
+      - echo "Start SageMaker Endpoint Creation"
+      - export PYTHONUNBUFFERED=TRUE
+      - |
+        python3 create-mode-endconfig-end.py
+      - echo "SageMaker Endpoint Completed."
