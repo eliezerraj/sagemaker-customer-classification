@@ -61,7 +61,7 @@ if __name__ == "__main__":
     print("6. Create the model... ")
     from time import gmtime, strftime
 
-    model_name = "kmeans-customer-model-v1-" + strftime("%Y-%m-%d-%H-%M-%S", gmtime())
+    model_name = "kmeans-customer-model-v3-" + strftime("%Y-%m-%d-%H-%M-%S", gmtime())
 
     print("-----------------------------------")
     print("7. Model name: " + model_name)
@@ -101,7 +101,7 @@ if __name__ == "__main__":
     print("-----------------------------------")
     print("9. Create endpoint configuration... ")
 
-    model_epc_name = "mlops-epc-customer-model-v1-" + strftime("%Y-%m-%d-%H-%M-%S", gmtime())
+    model_epc_name = "mlops-epc-customer-model-v3-" + strftime("%Y-%m-%d-%H-%M-%S", gmtime())
 
     endpoint_config_response = sm_client.create_endpoint_config(
         EndpointConfigName=model_epc_name,
@@ -124,7 +124,7 @@ if __name__ == "__main__":
     print("-----------------------------------")
     print("11. Create endpoint ... ")
 
-    endpoint_name = "kmeans-serverless-ep-customer-model-v1-" + strftime("%Y-%m-%d-%H-%M-%S", gmtime())
+    endpoint_name = "kmeans-serverless-ep-customer-model-v3-" + strftime("%Y-%m-%d-%H-%M-%S", gmtime())
 
     create_endpoint_response = sm_client.create_endpoint(
         EndpointName=endpoint_name,

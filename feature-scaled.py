@@ -12,6 +12,7 @@ from sklearn.preprocessing import StandardScaler
 
 # install libraries
 def install(package):
+    print("===> Installing package: ", package)
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
 # load the requirements
@@ -21,6 +22,8 @@ def install_requirements():
             install(line.strip())
 
 if __name__ == "__main__":
+    print("-------------------- main ----------------------------")
+    print("Sagemaker Pipeline version 30/04/2024-v1.0")
 
     base_dir = "/opt/ml/processing"
 
@@ -32,7 +35,7 @@ if __name__ == "__main__":
     )
 
     print("-------------------- dataframe data  ----------------------------")
-    print("shape : ", df.shape)
+    print("1. shape : ", df.shape)
 
     #Cleaning and econding
     df_customer = df.filter(['CLIENTNUM',
@@ -80,7 +83,10 @@ if __name__ == "__main__":
     df_data_scaled = scaler.fit_transform(df_training).astype('float32')
 
     print("-------------------- save scaler model -----------------------")
+    # Shows scikit-learn version
+    import sklearn
     import s3fs
+    print("2. sklearn version: ", sklearn.__version__)
 
     bucket_name = "eliezerraj-908671954593-dataset/customer"
     location_scaler = 's3://{}'.format(bucket_name)
@@ -91,7 +97,7 @@ if __name__ == "__main__":
     with fs.open(output_file, 'wb') as f:
         joblib.dump(scaler, f)
 
-    print("model saved :", output_file)
+    print("3. model saved :", output_file)
 
     print("-------------------- df_data_scaled  ----------------------------")
     print(df_data_scaled)
@@ -110,4 +116,4 @@ if __name__ == "__main__":
                        header=True,
                        index=False)
 
-    print("## Processing completed. Exiting.")
+    print("Processing completed. Exiting.")
